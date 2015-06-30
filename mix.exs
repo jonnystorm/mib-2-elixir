@@ -15,6 +15,6 @@ defmodule MIB_2.Mixfile do
   end
 
   defp deps do
-    [{:snmp_mib_ex, github: "jonnystorm/snmp-mib-elixir"}]
+    [{:snmp_mib_ex, git: "https://github.com/jonnystorm/snmp-mib-elixir"}]
   end
 end

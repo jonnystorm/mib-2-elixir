@@ -4,12 +4,16 @@
 # as published by Sam Hocevar. See the COPYING.WTFPL file for more details.
 
 defmodule MIB2.IP.IPNetToMediaTable do
-  @oid_MIB_2_ip "1.3.6.1.2.1.4"
+  @oid_MIB_2_ip_ipNetToMediaTable "1.3.6.1.2.1.4.22"
+
+  def oid do
+    @oid_MIB_2_ip_ipNetToMediaTable
+  end
 
   defp get_key_by_value(dict, value) do
-    dict
-      |> Enum.find(fn {_k, v} -> v == value end)
-      |> (fn {k, _v} -> k end).()
+    {k, _} = dict |> Enum.find(fn {_k, v} -> v == value end)
+
+    k
   end 
 
   # Convenience types: not part of MIB
@@ -98,19 +102,19 @@ defmodule MIB2.IP.IPNetToMediaTable do
       SNMPMIB.object(oid, type, ipNetToMediaEntry.ipNetToMediaType)
     end
     def ipNetToMediaType(ipNetToMediaEntry, value) do
-      CiscoConfigCopy.typeIpNetToMediaType
-      |> Map.fetch!(value)
-      |> (&( %IPNetToMediaEntry{ipNetToMediaEntry|ipNetToMediaType: &1} )).()
+      value = CiscoConfigCopy.typeIpNetToMediaType |> Map.fetch!(value)
+
+      %IPNetToMediaEntry{ipNetToMediaEntry|ipNetToMediaType: value}
     end
   end
 
   @spec ip_net_to_media_entry(integer, String.t, String.t, ipNetToMediaType) :: IPNetToMediaEntry.t
   def ip_net_to_media_entry(if_index, network_address, physical_address, type) do
     %IPNetToMediaEntry{}
-      |> IPNetToMediaEntry.ipNetToMediaIfIndex(if_index)
-      |> IPNetToMediaEntry.ipNetToMediaPhysAddress(physical_address)
-      |> IPNetToMediaEntry.ipNetToMediaNetAddress(network_address)
-      |> IPNetToMediaEntry.ipNetToMediaType(type)
+    |> IPNetToMediaEntry.ipNetToMediaIfIndex(if_index)
+    |> IPNetToMediaEntry.ipNetToMediaPhysAddress(physical_address)
+    |> IPNetToMediaEntry.ipNetToMediaNetAddress(network_address)
+    |> IPNetToMediaEntry.ipNetToMediaType(type)
   end
 end
 
