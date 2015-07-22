@@ -36,20 +36,22 @@ defmodule MIB2.IP.IPRouteTable do
   @type ipRouteProto :: 1..14
   def typeIpRouteProto do
     %{
-      other:      1,
-      local:      2,
-      netmgmt:    3,
-      icmp:       4,
-      egp:        5,
-      ggp:        6,
-      hello:      7,
-      rip:        8,
-      is_is:      9,
-      es_is:     10,
-      ciscoIgrp: 11,
-      bbnSpfIgp: 12,
-      ospf:      13,
-      bgp:       14
+      other:       1,
+      local:       2,
+      netmgmt:     3,
+      icmp:        4,
+      egp:         5,
+      ggp:         6,
+      hello:       7,
+      rip:         8,
+      is_is:       9,
+      es_is:      10,
+      ciscoIgrp:  11,
+      bbnSpfIgp:  12,
+      ospf:       13,
+      bgp:        14,
+      idpr:       15,
+      ciscoEigrp: 16
     }
   end
   def typeIpRouteProto(value) when is_atom(value) do
