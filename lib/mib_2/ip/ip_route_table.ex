@@ -33,7 +33,7 @@ defmodule MIB2.IP.IPRouteTable do
     get_key_by_value(typeIpRouteType, value)
   end
 
-  @type ipRouteProto :: 1..14
+  @type ipRouteProto :: 1..16
   def typeIpRouteProto do
     %{
       other:       1,
